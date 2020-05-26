@@ -14,7 +14,7 @@ namespace AGLPetLister
 
             var serviceProvider = services.BuildServiceProvider();
                         
-            serviceProvider.GetService<App>().Run();
+            serviceProvider.GetService<DisplayApp>().Run();
         }
 
         private static IServiceCollection ConfigureServices()
@@ -27,7 +27,7 @@ namespace AGLPetLister
             services.AddHttpClient();
 
             // Add Services
-            services.AddTransient<App>();
+            services.AddTransient<DisplayApp>();
             services.AddTransient<IPetAPIService, PetAPIService>();
             services.AddTransient<PetListerService>();
 
