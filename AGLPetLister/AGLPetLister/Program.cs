@@ -26,9 +26,10 @@ namespace AGLPetLister
 
             services.AddHttpClient();
 
-            // Add the AppService
+            // Add Services
             services.AddTransient<App>();
             services.AddTransient<IPetAPIService, PetAPIService>();
+            services.AddTransient<PetListerService>();
 
             return services;
         }

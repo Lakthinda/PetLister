@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace AGLPetLister.Services
 {
-    interface IPetAPIService
+    public interface IPetAPIService
     {
         Task<List<Owner>> GetOwners();
     }
