@@ -1,4 +1,5 @@
 ﻿using AGLPetLister.Services;
+using log4net.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -25,6 +26,9 @@ namespace AGLPetLister
             services.AddSingleton(config);
 
             services.AddHttpClient();
+
+            // Add logs
+            //services.AddSingleton<ILogger>();
 
             // Add Services
             services.AddTransient<DisplayApp>();
