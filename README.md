@@ -1,2 +1,4 @@
 # PetLister
-List Pet names in ascending order.
+- Use Dependency injection in .Net Core 3.1 Console App
+- Used SOLID principles where applicable
+- Created Unit tests using NUnits
