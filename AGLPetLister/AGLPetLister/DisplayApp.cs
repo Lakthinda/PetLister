@@ -1,7 +1,6 @@
 ﻿using AGLPetLister.Models;
 using AGLPetLister.Services;
-using log4net.Core;
-//using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -13,17 +12,13 @@ namespace AGLPetLister
     public class DisplayApp
     {        
         private readonly PetListerService _petListerService;
-        //private readonly ILogger _logger;
+        private readonly ILogger _logger;
 
-        //public DisplayApp(PetListerService petListerService,ILogger logger)
-        //{
-        //    _petListerService = petListerService;
-        //    _logger = logger;
-        //}
-        
-        public DisplayApp(PetListerService petListerService)
+        public DisplayApp(PetListerService petListerService,
+                          ILogger<DisplayApp> logger)
         {
-            _petListerService = petListerService;            
+            _petListerService = petListerService;
+            _logger = logger;
         }
         public void Run()
         {           
@@ -37,19 +32,17 @@ namespace AGLPetLister
         public async Task OnGet()
         {
             var maleOwnerCatList = await _petListerService.GetPets(Sex.Male);
-            var femaleOwnerCatList = await _petListerService.GetPets(Sex.Female);
-                        
-            if(maleOwnerCatList == null)
-            {
-                //TODO: Log
-                //_logger.LogInformation("No Male Owner Cats to Display.");
-                //_logger.Log()
+            var femaleOwnerCatList = await _petListerService.GetPets(Sex.Female);            
+
+            if (maleOwnerCatList == null)
+            {                
+                _logger.LogInformation("No Male Owner Cats to Display.");
+                
                 return;
             }
             if (maleOwnerCatList == null)
-            {
-                //TODO: Log
-                //_logger.LogInformation("No Female Owner Cats to Display.");
+            {             
+                _logger.LogInformation("No Female Owner Cats to Display.");
                 return;
             }
 

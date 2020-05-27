@@ -1,7 +1,7 @@
 ﻿using AGLPetLister.Services;
-using log4net.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 
@@ -36,6 +36,8 @@ namespace AGLPetLister
 
             // Add logs
             //services.AddSingleton<ILogger>();
+            services.AddLogging(config => config.AddConsole())
+                    .Configure<LoggerFilterOptions>(options => options.MinLevel = LogLevel.Information);
 
             // Add Services
             services.AddTransient<DisplayApp>();

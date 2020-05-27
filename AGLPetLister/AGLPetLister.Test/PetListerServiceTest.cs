@@ -1,5 +1,6 @@
 using AGLPetLister.Models;
 using AGLPetLister.Services;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -61,11 +62,13 @@ namespace AGLPetLister.Test
                 }
             };
 
-            Mock<IPetAPIService> petAPIService = new Mock<IPetAPIService>();
+            var petAPIService = new Mock<IPetAPIService>();
             petAPIService.Setup(p => p.GetOwners())
                          .Returns(Task.FromResult(petOwners));
+
+            var logger = new Mock<ILogger<PetListerService>>();
                         
-            petListerService = new PetListerService(petAPIService.Object);
+            petListerService = new PetListerService(petAPIService.Object, logger.Object);
         }
 
         [TestCase(Sex.Male)]

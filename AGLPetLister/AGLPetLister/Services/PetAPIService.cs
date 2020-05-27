@@ -1,5 +1,6 @@
 ﻿using AGLPetLister.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,15 @@ namespace AGLPetLister.Services
     {
         private readonly IHttpClientFactory _clientFactory;
         private readonly IConfiguration _config;
-        public PetAPIService(IHttpClientFactory clientFactory,IConfiguration config)
+        private readonly ILogger _logger;
+
+        public PetAPIService(IHttpClientFactory clientFactory,
+                             IConfiguration config,
+                             ILogger<PetAPIService> logger)
         {
             _clientFactory = clientFactory;
             _config = config;
+            _logger = logger;
         }
 
         /// <summary>
@@ -43,13 +49,17 @@ namespace AGLPetLister.Services
                     var petOwners = JsonConvert.DeserializeObject<List<Owner>>(result);
                     return petOwners;
                 }
+                else
+                {                    
+                    _logger.LogError($"Response: {response.StatusCode}, Content: {response.Content}");
+                    return null;
+                }
 
-                // TODO: Log Errors                
-                return null;
+                
             }
             catch (Exception e)
             {
-                // TODO: Log Exception
+                _logger.LogError($"Response: {e.Message}",e);
                 return null;
             }
         }

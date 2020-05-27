@@ -1,4 +1,5 @@
 ﻿using AGLPetLister.Models;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,9 +12,12 @@ namespace AGLPetLister.Services
     public class PetListerService
     {
         private readonly IPetAPIService _petAPIService;
-        public PetListerService(IPetAPIService petAPIService)
+        private readonly ILogger _logger;
+        public PetListerService(IPetAPIService petAPIService,
+                                ILogger<PetListerService> logger)
         {
             _petAPIService = petAPIService;
+            _logger = logger;
         }
 
         /// <summary>
@@ -44,6 +48,7 @@ namespace AGLPetLister.Services
             else
             {
                 // TODO: Log errors
+                _logger.LogInformation($"PetOwners returns empty results for Gender Type {sex}");
                 return null;
             }
         }
