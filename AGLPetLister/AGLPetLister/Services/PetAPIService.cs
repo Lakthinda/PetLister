@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace AGLPetLister.Services
 {
+    /// <summary>
+    /// Use HTTPClient to communicate with API
+    /// </summary>
     public class PetAPIService : IPetAPIService
     {
         private readonly IHttpClientFactory _clientFactory;
@@ -18,6 +21,10 @@ namespace AGLPetLister.Services
             _config = config;
         }
 
+        /// <summary>
+        /// Returns List of Owners from Web API
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<Owner>> GetOwners()
         {
             try

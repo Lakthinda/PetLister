@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace AGLPetLister
 {
+    /// <summary>
+    /// Client viewing component Displays results
+    /// </summary>
     public class DisplayApp
     {        
         private readonly PetListerService _petListerService;
@@ -27,6 +30,10 @@ namespace AGLPetLister
             OnGet().GetAwaiter().GetResult();
         }
 
+        /// <summary>
+        /// Display List of pet names under each Gender type
+        /// </summary>
+        /// <returns></returns>
         public async Task OnGet()
         {
             var maleOwnerCatList = await _petListerService.GetPets(Sex.Male);

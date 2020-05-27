@@ -7,6 +7,9 @@ using System.IO;
 
 namespace AGLPetLister
 {
+    /// <summary>
+    /// This setup the Dependency Injection module
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
@@ -18,6 +21,10 @@ namespace AGLPetLister
             serviceProvider.GetService<DisplayApp>().Run();
         }
 
+        /// <summary>
+        /// Intiate the ServiceCollection
+        /// </summary>
+        /// <returns></returns>
         private static IServiceCollection ConfigureServices()
         {
             IServiceCollection services = new ServiceCollection();
@@ -38,6 +45,10 @@ namespace AGLPetLister
             return services;
         }
 
+        /// <summary>
+        /// Setup the Configuration file
+        /// </summary>
+        /// <returns></returns>
         public static IConfiguration LoadConfiguration()
         {
             var builder = new ConfigurationBuilder()
